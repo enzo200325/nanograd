@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/Users/nzo/dev/ia/nzo_cad/cmake_install.cmake"
+		"/Users/nzo/dev/ia/nanograd/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

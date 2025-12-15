@@ -1,3 +1,3 @@
-/Users/nzo/dev/ia/nzo_cad/CMakeFiles/myProgram.dir
-/Users/nzo/dev/ia/nzo_cad/CMakeFiles/edit_cache.dir
-/Users/nzo/dev/ia/nzo_cad/CMakeFiles/rebuild_cache.dir
+/Users/nzo/dev/ia/nanograd/CMakeFiles/myProgram.dir
+/Users/nzo/dev/ia/nanograd/CMakeFiles/edit_cache.dir
+/Users/nzo/dev/ia/nanograd/CMakeFiles/rebuild_cache.dir

@@ -54,10 +54,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/nzo/dev/ia/nzo_cad
+CMAKE_SOURCE_DIR = /Users/nzo/dev/ia/nanograd
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/nzo/dev/ia/nzo_cad
+CMAKE_BINARY_DIR = /Users/nzo/dev/ia/nanograd
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -85,14 +85,14 @@ clean: CMakeFiles/myProgram.dir/clean
 CMakeFiles/myProgram.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/myProgram.dir/build.make CMakeFiles/myProgram.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/myProgram.dir/build.make CMakeFiles/myProgram.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/nzo/dev/ia/nzo_cad/CMakeFiles --progress-num=1,2 "Built target myProgram"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/nzo/dev/ia/nanograd/CMakeFiles --progress-num=1,2 "Built target myProgram"
 .PHONY : CMakeFiles/myProgram.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/myProgram.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/nzo/dev/ia/nzo_cad/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/nzo/dev/ia/nanograd/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/myProgram.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/nzo/dev/ia/nzo_cad/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/nzo/dev/ia/nanograd/CMakeFiles 0
 .PHONY : CMakeFiles/myProgram.dir/rule
 
 # Convenience name for target.
@@ -102,7 +102,7 @@ myProgram: CMakeFiles/myProgram.dir/rule
 # codegen rule for target.
 CMakeFiles/myProgram.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/myProgram.dir/build.make CMakeFiles/myProgram.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/nzo/dev/ia/nzo_cad/CMakeFiles --progress-num=1,2 "Finished codegen for target myProgram"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/Users/nzo/dev/ia/nanograd/CMakeFiles --progress-num=1,2 "Finished codegen for target myProgram"
 .PHONY : CMakeFiles/myProgram.dir/codegen
 
 # clean rule for target.

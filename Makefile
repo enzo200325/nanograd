@@ -57,10 +57,10 @@ RM = /opt/homebrew/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/nzo/dev/ia/nzo_cad
+CMAKE_SOURCE_DIR = /Users/nzo/dev/ia/nanograd
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/nzo/dev/ia/nzo_cad
+CMAKE_BINARY_DIR = /Users/nzo/dev/ia/nanograd
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/nzo/dev/ia/nzo_cad/CMakeFiles /Users/nzo/dev/ia/nzo_cad//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/nzo/dev/ia/nanograd/CMakeFiles /Users/nzo/dev/ia/nanograd//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/nzo/dev/ia/nzo_cad/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/nzo/dev/ia/nanograd/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
