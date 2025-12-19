@@ -4,9 +4,9 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/nzo/dev/ia/nanograd/autograd
+CXX_INCLUDES = -I/Users/nzo/dev/ia/nanograd/autograd -I/Users/nzo/dev/ia/nanograd/build/_deps/json-src/include
 
-CXX_FLAGSarm64 = -std=gnu++2b -arch arm64
+CXX_FLAGSarm64 = -std=gnu++2b -arch arm64 -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer
 
-CXX_FLAGS = -std=gnu++2b -arch arm64
+CXX_FLAGS = -std=gnu++2b -arch arm64 -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer
 

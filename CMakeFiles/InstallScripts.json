@@ -1,7 +1,8 @@
 {
 	"InstallScripts" : 
 	[
-		"/Users/nzo/dev/ia/nanograd/cmake_install.cmake"
+		"/Users/nzo/dev/ia/nanograd/cmake_install.cmake",
+		"/Users/nzo/dev/ia/nanograd/_deps/json-build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }

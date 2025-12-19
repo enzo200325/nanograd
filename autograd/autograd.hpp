@@ -14,16 +14,21 @@ double uniform(double l, double r) {
 
 struct Node {
     double x, grad;
+    bool is_parameter; 
     std::array<int, 2> child_id;
-    int my_id; 
     std::function<void(Node&, Node&, Node&)> backward_func; 
 
     Node(
         double _x = 0.0, 
         double _grad = 0.0, 
         std::array<int, 2> _child_id = {-1, -1}, 
-        std::function<void(Node&, Node&, Node&)> _backward_func = NULL 
-    ) : x(_x), grad(_grad), child_id(_child_id), backward_func(_backward_func) {} 
+        std::function<void(Node&, Node&, Node&)> _backward_func = NULL, 
+        double _is_parameter = 0
+    ) : x(_x), grad(_grad), child_id(_child_id), backward_func(_backward_func), is_parameter(_is_parameter) {} 
+
+    void set_parameter() {
+        is_parameter = 1; 
+    }
 }; 
 
 struct Tape {
@@ -66,11 +71,13 @@ thread_local Tape tape;
 
 struct Value {
     int id; 
-    Value(double x) {
+    Value(double x, bool is_parameter = 0) {
         Node node(x); 
+        if (is_parameter) node.set_parameter(); 
         id = tape.add_node(std::move(node));
     }
-    Value(Node&& node) {
+    Value(Node&& node, bool is_parameter = 0) {
+        if (is_parameter) node.set_parameter(); 
         id = tape.add_node(std::move(node)); 
     }
     Value() {} 
@@ -135,6 +142,14 @@ struct Value {
         return (e_to_x - e_to_m_x) / (e_to_x + e_to_m_x); 
     }
 
+    Value log() const {
+        Node &a = tape.nodes[id]; 
+        Node par_node(std::log(a.x), 0.0, {id, -1}, [](Node &par, Node &a, Node &b) -> void {
+            a.grad += par.grad / a.x; 
+        }); 
+        return Value(std::move(par_node)); 
+    }
+
     void backward() {
         tape.backward(id); 
     }
@@ -148,31 +163,35 @@ std::ostream& operator<<(std::ostream& os, const Value& v) {
 struct Neuron {
     std::vector<Value> w; 
     Value b; 
-    Neuron(int n_in) {
+    bool no_bias, no_activation; 
+    Neuron(int n_in, bool _no_bias = 0, bool _no_activation = 0) : no_bias(_no_bias), no_activation(_no_activation) {
         w.reserve(n_in); 
-        for (int i = 0; i < n_in; i++) w.emplace_back(Value(uniform(-1, 1))); 
-        b = Value(uniform(-1, 1)); 
+        for (int i = 0; i < n_in; i++) w.emplace_back(Value(uniform(-1, 1), 1)); 
+        if (!no_bias) 
+            b = Value(uniform(-1, 1), 1); 
     } 
     Value operator()(const std::vector<Value> x) const {
         assert(w.size() == x.size()); 
-        Value ret = b; 
+        Value ret = no_bias ? 0 : b; 
         for (int i = 0; i < (int)w.size(); i++) ret = ret + w[i]*x[i]; 
-        return ret.tanh(); 
+        return no_activation ? ret : ret.tanh(); 
     }
 
     std::vector<Value> parameters() {
         std::vector<Value> params = w; 
-        params.emplace_back(b); 
+        if (!no_bias)
+            params.emplace_back(b); 
         return params; 
     }
 }; 
 
 struct Layer {
     std::vector<Neuron> neurons; 
-    Layer(int n_in, int n_out) {
+    Layer() {}
+    Layer(int n_in, int n_out, bool no_bias = 0, bool no_activation = 0) {
         assert(n_in > 0 && n_out > 0); 
         neurons.reserve(n_out); 
-        for (int i = 0; i < n_out; i++) neurons.emplace_back(Neuron(n_in)); 
+        for (int i = 0; i < n_out; i++) neurons.emplace_back(Neuron(n_in, no_bias, no_activation)); 
     }
     std::vector<Value> operator()(const std::vector<Value>& x) const {
         assert(x.size() == neurons[0].w.size()); 
@@ -190,6 +209,25 @@ struct Layer {
             params.insert(params.end(), neuron_params.begin(), neuron_params.end()); 
         }
         return params; 
+    }
+}; 
+
+std::vector<Value> oneHot(int n, int pos) {
+    std::vector<Value> ret(n, 0); 
+    ret[pos] = 1; 
+    return ret; 
+}
+
+struct Linear {
+    Layer layer; 
+    Linear(int n_in, int n_out, bool no_bias = 0) {
+        layer = Layer(n_in, n_out, no_bias, 1); 
+    }
+    std::vector<Value> operator()(const std::vector<Value>& x) const {
+        return layer(x); 
+    }
+    std::vector<Value> parameters() {
+        return layer.parameters(); 
     }
 }; 
 

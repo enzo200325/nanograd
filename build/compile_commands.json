@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/nzo/dev/ia/nanograd/build",
+  "command": "/usr/bin/c++  -I/Users/nzo/dev/ia/nanograd/autograd -I/Users/nzo/dev/ia/nanograd/build/_deps/json-src/include -std=gnu++2b -arch arm64 -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -o CMakeFiles/myProgram.dir/main.cpp.o -c /Users/nzo/dev/ia/nanograd/main.cpp",
+  "file": "/Users/nzo/dev/ia/nanograd/main.cpp",
+  "output": "CMakeFiles/myProgram.dir/main.cpp.o"
+}
+]

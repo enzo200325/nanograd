@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = 
+CXX_INCLUDES = -I/Users/nzo/dev/ia/nanograd/autograd -I/Users/nzo/dev/ia/nanograd/_deps/json-src/include
 
 CXX_FLAGSarm64 = -std=gnu++2b -arch arm64
 
